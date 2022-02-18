@@ -5,9 +5,17 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
+#from crypt import methods
+#from tkinter.tix import Form
+from email import message
 from app import app
 from flask import render_template, request, redirect, url_for, flash
+from app.forms import contactForm
 
+
+
+from app import mail
+from flask_mail import Message
 
 ###
 # Routing for your application.
@@ -22,9 +30,25 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Shantel Wellington")
 
+@app.route('/contact', methods=['POST', 'GET'])
+def contact():
+    form = contactForm(request.form)
+    name = request.form.get('name', False)
+    email = request.form.get('email', False)
+    subject = request.form.get('subject', False)
+    message = request.form.get('message', False)
 
+    if request.method== 'POST' and form.validate():
+        msg = Message(f"{subject}", sender=(f"{name}", 
+        f"{email}"),recipients=[f"{'girls@gmail.com'}"])
+        msg.body = f"{message}"
+        mail.send(msg)
+        flash('Email sent successfully')
+        return redirect(url_for('home'))
+
+    return render_template('contact.html', form= form)
 ###
 # The functions below should be applicable to all Flask apps.
 ###

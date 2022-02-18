@@ -1,3 +1,36 @@
 body {
     padding-top: 5rem;
 }
+
+input{
+    display: block;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    width: 20rem;
+    height: 3rem;
+}
+label{
+    font-weight: bold;
+}
+li{list-style-type: none}
+textarea{
+    width: 22rem;
+    height: 10rem;
+    margin-bottom: 2rem;
+}
+button{
+    display: block;
+    border-radius: 5px;
+    color: black;
+    background: rgb(143, 180, 211);
+    border-color: rgb(143, 180, 211);
+}
+
+span{
+    color: red;
+}
+
+h2{
+    font-size: 20px;
+
+}
